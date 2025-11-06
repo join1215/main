@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>⚡ 1215 – Private Invite 🌙</title>
+
+<meta name="description" content="1215 is a curated community where tech, creativity, and law intersect. Join inspiring in-person sessions in London and beyond." />
+<meta name="keywords" content="tech, creativity, law, community, London, in-person sessions, curated events, 1215" />
+<meta name="author" content="1215 Team" />
+<meta name="robots" content="index,follow" />
+
+<meta property="og:title" content="1215 – Where Tech Meets Creativity and Law" />
+<meta property="og:description" content="Join a curated community of makers, thinkers, and dreamers exploring tech, creativity, and the rules that shape them." />
+<meta property="og:image" content="https://www.join1215.com/images/og-image.jpg" />
+<meta property="og:url" content="https://www.join1215.com" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="1215 – Private Invite 🌙" />
+<meta name="twitter:description" content="Curious minds welcome. Explore tech, creativity, and law in inspiring in-person sessions." />
+<meta name="twitter:image" content="https://join1215.com/images/twitter-card.jpg" />
+
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="1215" />
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="/favicon/site.webmanifest" />
+
+<!-- Optional: PWA-specific icons (for Android, etc.) -->
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon/web-app-manifest-512x512.png" />
+
+<!-- Theme color -->
+<meta name="theme-color" content="#121212" />
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Sawarabi+Mincho&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --background-color: #1b0c0d;
+  --ambient-glow: rgba(255, 50, 50, 0.15);
+  --poster-gradient-start: #7f0d12;
+  --poster-gradient-end: #3c0a0d;
+  --text-color: #ffe5d3;
+  --intro-color: #ffbfa0;
+  --tagline-color: #ffc6b0;
+  --button-bg-start: #e63946;
+  --button-bg-end: #f5475d;
+  --button-text-color: #fff5e6;
+  --button-hover-glow1: #ff9b95;
+  --button-hover-glow2: #ff6b6b;
+  --info-btn-bg: #b80f1a;
+  --info-btn-text: #eee;
+  --info-btn-hover-bg: #f5475d;
+  --overlay-bg: rgba(220, 20, 20, 0.85);
+  --close-btn-bg: rgba(255, 255, 255, 0.1);
+  --close-btn-hover-bg: rgba(255, 255, 255, 0.2);
+  --close-btn-hover-color: #ff6b6b;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, var(--ambient-glow) 0%, var(--background-color) 80%);
+  z-index: 0;
+}
+
+/* FADE-IN ANIMATION */
+.poster {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(145deg, var(--poster-gradient-start), var(--poster-gradient-end));
+  border-radius: 40px;
+  padding: 60px 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 
+    0 0 80px var(--ambient-glow),
+    inset 0 2px 12px rgba(255,255,255,0.05),
+    inset 0 -3px 12px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: opacity 2s ease, transform 2s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.poster.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.emboss {
+  position: relative;
+  color: var(--text-color);
+  text-shadow:
+    1px 1px 2px rgba(0,0,0,0.7),
+    -1px -1px 2px rgba(255,255,255,0.1);
+}
+
+.intro {
+  font-family: 'Sawarabi Mincho', serif;
+  font-size: 60px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: var(--intro-color);
+  text-shadow:
+    2px 2px 6px rgba(0,0,0,0.7),
+    0 0 20px rgba(255,100,100,0.4);
+}
+
+.tagline {
+  font-family: 'Sawarabi Mincho', serif;
+  font-size: 24px;
+  margin-bottom: 40px;
+  letter-spacing: 1.5px;
+  color: var(--tagline-color);
+  text-shadow:
+    1px 1px 3px rgba(0,0,0,0.7),
+    0 0 8px rgba(255,120,120,0.25);
+}
+
+.teaser {
+  font-size: 20px;
+  line-height: 2;
+  color: var(--text-color);
+  margin-bottom: 50px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.come {
+  display: inline-block;
+  padding: 18px 40px;
+  border-radius: 14px;
+  font-size: 22px;
+  font-weight: 600;
+  background: linear-gradient(145deg, var(--button-bg-start), var(--button-bg-end));
+  color: var(--button-text-color);
+  text-decoration: none;
+  box-shadow:
+    0 4px 15px var(--ambient-glow),
+    inset 0 2px 6px rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.come:hover {
+  color: #fff;
+  box-shadow:
+    0 0 25px var(--button-hover-glow1),
+    0 0 50px var(--button-hover-glow2),
+    inset 0 2px 8px rgba(255,255,255,0.3);
+  transform: translateY(-3px);
+}
+
+.info-btn {
+  padding: 12px 18px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--info-btn-bg);
+  color: var(--info-btn-text);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.info-btn:hover {
+  background: var(--info-btn-hover-bg);
+  color: var(--button-text-color);
+}
+
+/* Top-right container for Faqs + Swag */
+.top-right-buttons {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+/* Top-left expand button */
+#expandBtn {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  background: rgba(255,255,255,0.1);
+  color: #ffe5d3;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 100;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  transition: all 0.3s ease;
+}
+#expandBtn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+/* Minimize button for poster */
+.minimize-btn {
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: var(--text-color);
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: absolute;
+  z-index: 2;
+}
+.minimize-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+/* Overlay styles */
+.overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(50, 10, 12, 0.95), rgba(20, 5, 6, 0.85));
+  z-index: 20;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 50px 20px;
+  box-sizing: border-box;
+}
+
+.overlay-content {
+  max-width: 700px;
+  margin: auto;
+  color: var(--text-color);
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.overlay-content h2 {
+  margin-top: 30px;
+  font-size: 28px;
+}
+
+.overlay-content ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 50%;
+  background: var(--close-btn-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: var(--close-btn-hover-bg);
+  color: var(--close-btn-hover-color);
+  transform: scale(1.1);
+  box-shadow: 0 6px 40px rgba(255,50,50,0.5);
+}
+
+/* Merch grid */
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.merch-grid img {
+  width: 100%;
+  border-radius: 16px;
+  border: 2px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.merch-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,50,50,0.4);
+}
+
+@media (max-width: 650px) {
+  .poster { 
+    padding: 30px 15px;
+    max-width: 100%;
+  }
+
+  .intro { font-size: 36px; }
+  .tagline { font-size: clamp(16px, 4vw, 20px); letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .teaser { font-size: 16px; line-height: 1.8; }
+  .come { font-size: 20px; padding: 16px 32px; }
+  .overlay-content { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <span class="minimize-btn">&#8211;</span>
+  <div class="intro emboss">1215</div>
+<div class="tagline emboss">Curious minds welcome.</div>
+  <div class="teaser emboss">
+    <!--<p>Curious minds welcome.</p>-->
+    
+    <p>We bring people together to chat about interesting things that involve technology, creativity, and the rules that govern them.
+</p>
+    <p>Carefully curated, endlessly inspiring.</p>
+  </div>
+
+  <a href="mailto:membership@join1215.com?subject=Membership Application" class="come">
+    Apply
+  </a>
+</div>
+
+<!-- Top-right buttons -->
+<div class="top-right-buttons">
+  <button class="info-btn">Faqs</button>
+  <button id="merchBtn" class="info-btn">Swag</button>
+</div>
+
+<!-- Top-left expand button -->
+<button id="expandBtn">+</button>
+
+<!-- Info Overlay -->
+<div id="overlay" class="overlay">
+  <div class="overlay-content">
+    <span class="close-btn">&times;</span>
+    <h2>About Us</h2>
+    <p>1215 is where tech meets creativity mixed with law. Our team brings together makers, thinkers, and dreamers to chat about quite literally everything.</p>
+    
+      <h2>Who's behind 1215</h2>
+    <p>A small team of professionals in tech, creativity, and law manages 1215 behind the scenes, curating experiences and ensuring the community stays safe, inspiring, and meaningful.</p>
+    
+
+
+    <h2>Who can apply</h2>
+    <p>Curious minds from any background.</p>
+    
+    <h2>Inclusivity & Safety</h2>
+    <p>1215 Sessions is a safe, welcoming space for everyone, regardless of age, background, or experience. We encourage respect, curiosity, and open-minded collaboration.</p>
+
+    <h2>Is it free</h2>
+    <p>Membership and participation are currently free and open to those eager to engage. This may change in the future.</p>
+    
+    <h2>Where are the sessions held?</h2>
+    <p>Sessions are held predominantly in and around London (with plans to expand globally).</p>
+
+    <h2>Virtual sessions</h2>
+    <p>All our sessions are in person — we don’t do virtual meetups.</p>
+  </div>
+</div>
+
+<!-- Merch Overlay -->
+<div id="merchOverlay" class="overlay">
+  <div class="overlay-content">
+    <span class="close-btn" id="closeMerch">&times;</span>
+    <!--<h2>1215 Merch</h2>
+    <p>Check out our exclusive merchandise:</p>-->
+    
+    <div class="merch-grid">
+     <!-- Your Merch Images -->
+<img src="images/merc1.png" alt="Merch 1">
+<img src="images/merc2.png" alt="Merch 2">
+<img src="images/merc3.png" alt="Merch 3">
+<img src="images/merc4.png" alt="Merch 4">
+
+<!-- Fullscreen Contained Overlay -->
+<div id="imageOverlay" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    overflow:hidden;
+">
+  <img id="fullscreenImg" src="" style="
+    max-width:90%;
+    max-height:90%;
+    object-fit:contain;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+    border-radius:10px;
+">
+</div>
+
+<script>
+// Select all merch images
+const merchImages = document.querySelectorAll('img[alt^="Merch"]');
+const imageOverlay = document.getElementById('imageOverlay');
+const fullscreenImg = document.getElementById('fullscreenImg');
+
+// Click an image → open overlay
+merchImages.forEach(img => {
+  img.style.cursor = 'pointer';
+  img.addEventListener('click', () => {
+    fullscreenImg.src = img.src;
+    imageOverlay.style.display = 'flex';
+  });
+});
+
+// Click overlay → close
+imageOverlay.addEventListener('click', () => {
+  imageOverlay.style.display = 'none';
+});
+</script>    </div>
+  </div>
+</div>
+
+<script>
+const overlay = document.getElementById('overlay');
+const merchOverlay = document.getElementById('merchOverlay');
+const infoBtns = document.querySelectorAll('.info-btn');
+const closeBtns = document.querySelectorAll('.close-btn');
+const poster = document.querySelector('.poster');
+const expandBtn = document.getElementById('expandBtn');
+const minimizeBtn = document.querySelector('.minimize-btn');
+
+infoBtns[0].addEventListener('click', () => overlay.style.display = 'block');
+infoBtns[1].addEventListener('click', () => merchOverlay.style.display = 'block');
+
+closeBtns.forEach(btn => btn.addEventListener('click', () => {
+  overlay.style.display = 'none';
+  merchOverlay.style.display = 'none';
+}));
+
+minimizeBtn.addEventListener('click', () => {
+  poster.style.display = 'none';
+  expandBtn.style.display = 'flex';
+});
+
+expandBtn.addEventListener('click', () => {
+  poster.style.display = 'block';
+  expandBtn.style.display = 'none';
+});
+
+window.addEventListener('load', () => {
+  poster.classList.add('visible');
+});
+</script>
+
+</body>
+</html>
