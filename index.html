@@ -432,56 +432,87 @@ body::before {
     <!--<h2>1215 Merch</h2>
     <p>Check out our exclusive merchandise:</p>-->
     
-    <div class="merch-grid">
-     <!-- Your Merch Images -->
-<img src="images/merc1.png" alt="Merch 1">
-<img src="images/merc2.png" alt="Merch 2">
-<img src="images/merc3.png" alt="Merch 3">
-<img src="images/merc4.png" alt="Merch 4">
+   <div class="merch-grid">
+  <div class="merch-item">
+    <img src="images/merc1.png" alt="Merch 1">
+    <div class="merch-info">
+      <h3>1215 Notebook</h3>
+      <p>Minimalist notebook for ideas & sketches.</p>
+     
+    </div>
+  </div>
+  <div class="merch-item">
+    <img src="images/merc2.png" alt="Merch 2">
+    <div class="merch-info">
+      <h3>1215 Member Card</h3>
+      <p>Exclusive Card</p>
+    
+    </div>
+  </div>
+  <div class="merch-item">
+    <img src="images/merc3.png" alt="Merch 3">
+    <div class="merch-info">
+      <h3>1215 Umbrella</h3>
+      <p>Durable umbrella to keep the rain away</p>
+    
+    </div>
+  </div>
+  <div class="merch-item">
+    <img src="images/merc4.png" alt="Merch 4">
+    <div class="merch-info">
+      <h3>1215 Baseball cap</h3>
+      <p>Cap to fuel your creativity on you run</p>
+     
+    </div>
+  </div>
+</div>
 
 <!-- Fullscreen Contained Overlay -->
-<div id="imageOverlay" style="
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.8);
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
-    overflow:hidden;
-">
-  <img id="fullscreenImg" src="" style="
-    max-width:90%;
-    max-height:90%;
-    object-fit:contain;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
-    border-radius:10px;
-">
+<div id="imageOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:1000;overflow:hidden;">
+  <span id="prevBtn" style="position:absolute;left:20px;font-size:60px;color:white;cursor:pointer;">&#10094;</span>
+  <img id="fullscreenImg" src="" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:10px;">
+  <span id="nextBtn" style="position:absolute;right:20px;font-size:60px;color:white;cursor:pointer;">&#10095;</span>
 </div>
+
+    
 
 <script>
 // Select all merch images
-const merchImages = document.querySelectorAll('img[alt^="Merch"]');
+const merchImages = Array.from(document.querySelectorAll('.merch-item img'));
 const imageOverlay = document.getElementById('imageOverlay');
 const fullscreenImg = document.getElementById('fullscreenImg');
+let currentIndex = 0;
 
-// Click an image → open overlay
-merchImages.forEach(img => {
+merchImages.forEach((img, index) => {
   img.style.cursor = 'pointer';
   img.addEventListener('click', () => {
+    currentIndex = index;
     fullscreenImg.src = img.src;
     imageOverlay.style.display = 'flex';
   });
+});
+
+// Arrow navigation
+document.getElementById('prevBtn').addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent closing overlay
+  currentIndex = (currentIndex - 1 + merchImages.length) % merchImages.length;
+  fullscreenImg.src = merchImages[currentIndex].src;
+});
+document.getElementById('nextBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % merchImages.length;
+  fullscreenImg.src = merchImages[currentIndex].src;
 });
 
 // Click overlay → close
 imageOverlay.addEventListener('click', () => {
   imageOverlay.style.display = 'none';
 });
-</script>    </div>
+
+
+</script> 
+  
+  </div>
   </div>
 </div>
 
