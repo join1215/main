@@ -558,30 +558,46 @@ imageOverlay.addEventListener('click', () => {
 <script>
 const overlay = document.getElementById('overlay');
 const merchOverlay = document.getElementById('merchOverlay');
-const infoBtns = document.querySelectorAll('.info-btn');
 const closeBtns = document.querySelectorAll('.close-btn');
 const poster = document.querySelector('.poster');
 const expandBtn = document.getElementById('expandBtn');
 const minimizeBtn = document.querySelector('.minimize-btn');
 
-// infoBtns[0].addEventListener('click', () => overlay.style.display = 'block'); // FAQ button disabled
-infoBtns[1].addEventListener('click', () => merchOverlay.style.display = 'block');
+// OPTIONAL FAQ BUTTON (only runs if it's actually in the HTML)
+const faqBtn = document.getElementById('faqBtn');
+if (faqBtn) {
+  faqBtn.addEventListener('click', () => {
+    overlay.style.display = 'block';
+  });
+}
 
-closeBtns.forEach(btn => btn.addEventListener('click', () => {
-  overlay.style.display = 'none';
-  merchOverlay.style.display = 'none';
-}));
+// MERCH BUTTON (always present)
+const merchBtn = document.getElementById('merchBtn');
+merchBtn.addEventListener('click', () => {
+  merchOverlay.style.display = 'block';
+});
 
+// Close buttons (close *both* overlays safely)
+closeBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    merchOverlay.style.display = 'none';
+  });
+});
+
+// Minimize hero
 minimizeBtn.addEventListener('click', () => {
   poster.style.display = 'none';
   expandBtn.style.display = 'flex';
 });
 
+// Expand hero
 expandBtn.addEventListener('click', () => {
   poster.style.display = 'block';
   expandBtn.style.display = 'none';
 });
 
+// Fade-in on load
 window.addEventListener('load', () => {
   poster.classList.add('visible');
 });
