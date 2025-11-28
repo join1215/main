@@ -412,7 +412,7 @@ body::before {
 
 <!-- Top-right buttons -->
 <div class="top-right-buttons">
-  <button class="info-btn">faqs</button>
+  <!-- <button class="info-btn">faqs</button> -->
   <button id="merchBtn" class="info-btn">merch</button>
 </div>
 
@@ -564,7 +564,7 @@ const poster = document.querySelector('.poster');
 const expandBtn = document.getElementById('expandBtn');
 const minimizeBtn = document.querySelector('.minimize-btn');
 
-infoBtns[0].addEventListener('click', () => overlay.style.display = 'block');
+// infoBtns[0].addEventListener('click', () => overlay.style.display = 'block'); // FAQ button disabled
 infoBtns[1].addEventListener('click', () => merchOverlay.style.display = 'block');
 
 closeBtns.forEach(btn => btn.addEventListener('click', () => {
