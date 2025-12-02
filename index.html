@@ -1,55 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>1215</title>
-<meta name="description" content="1215 isn’t an accelerator or an incubator. It’s something new — a selective circle for builders, creatives, and curious minds. Not everyone gets in. Will you?" />
-
-<meta name="keywords" content="1215, selective community, founders, creatives, tech, salon, invite-only, London events" />
-
-<meta name="author" content="1215 Team" />
-<meta name="robots" content="index,follow" />
-
-<meta property="og:title" content="1215 — Not an Accelerator. Not an Incubator." />
-<meta property="og:description" content="Something new. A selective circle for builders, creatives, and curious minds. Get chosen. Enter the circle." />
-  <meta property="og:image" content="https://www.join1215.com/images/og-image.jpg" />
-<meta property="og:url" content="https://www.join1215.com" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://www.join1215.com/images/og-image.jpg" />
-<meta property="og:image:width" content="1024" />
-<meta property="og:image:height" content="1024" />
-  
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="1215 — Enter the Circle" />
-<meta name="twitter:description" content="A selective community for builders and curious minds. Not everyone gets in." />
-  <meta name="twitter:image" content="https://www.join1215.com/twitter-card.jpg" />
-
-
-<!-- Favicons -->
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
-<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-<link rel="shortcut icon" href="/favicon/favicon.ico" />
-
-<!-- Apple Touch Icon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="1215" />
-
-<!-- Web App Manifest -->
-<link rel="manifest" href="/favicon/site.webmanifest" />
-
-<!-- Optional: PWA-specific icons (for Android, etc.) -->
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="/favicon/web-app-manifest-512x512.png" />
-
-<!-- Theme color -->
-<meta name="theme-color" content="#121212" />
-
-
-
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Sawarabi+Mincho&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1215 Responsive Circle</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -65,14 +20,35 @@
   --button-text-color: #fff5e6;
   --button-hover-glow1: #ff9b95;
   --button-hover-glow2: #ff6b6b;
-  --info-btn-bg: #b80f1a;
-  --info-btn-text: #eee;
-  --info-btn-hover-bg: #f5475d;
-  --overlay-bg: rgba(220, 20, 20, 0.85);
-  --close-btn-bg: rgba(255, 255, 255, 0.1);
-  --close-btn-hover-bg: rgba(255, 255, 255, 0.2);
+  --close-btn-bg: rgba(255,255,255,0.1);
+  --close-btn-hover-bg: rgba(255,255,255,0.2);
   --close-btn-hover-color: #ff6b6b;
 }
+
+@keyframes pulseGlow {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 80px var(--ambient-glow),
+      inset 0 2px 12px rgba(255,255,255,0.05),
+      inset 0 -3px 12px rgba(0,0,0,0.5);
+  }
+  50% {
+    transform: translateY(0) scale(1.025);
+    box-shadow:
+      0 0 120px rgba(255, 80, 80, 0.25),
+      inset 0 2px 14px rgba(255,255,255,0.08),
+      inset 0 -3px 14px rgba(0,0,0,0.55);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 80px var(--ambient-glow),
+      inset 0 2px 12px rgba(255,255,255,0.05),
+      inset 0 -3px 12px rgba(0,0,0,0.5);
+  }
+}
+
 
 html, body {
   margin: 0;
@@ -83,197 +59,129 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  position: relative;
-  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+    touch-action: none;  /* disables touch-based scrolling */
+
+  -webkit-overflow-scrolling: auto; /* prevents momentum scrolling on iOS */
 }
 
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, var(--ambient-glow) 0%, var(--background-color) 80%);
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(27,12,13,0.5); /* semi-transparent overlay */
   z-index: 0;
 }
+.poster-wrapper {
+    width: 82vmin;
+    height: 82vmin;
+        padding: 2vmin; /* extra space around the circle */
+    box-sizing: content-box;
 
-/* FADE-IN ANIMATION */
-.poster {
+  max-width: 90vw;
+  max-height: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  z-index: 1;
-  background: linear-gradient(145deg, var(--poster-gradient-start), var(--poster-gradient-end));
-  border-radius: 40px;
-  padding: 60px 40px;
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 
-    0 0 80px var(--ambient-glow),
-    inset 0 2px 12px rgba(255,255,255,0.05),
-    inset 0 -3px 12px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.05);
-  line-height: 1.5;
-  box-sizing: border-box;
-  transition: opacity 2s ease, transform 2s ease;
-  opacity: 0;
-  transform: translateY(20px);
+    z-index: 10; /* stays above body::before */
+  
 }
 
+.poster {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+  /* --- GLASS CIRCLE --- */
+  background: rgba(255, 255, 255, 0.05);                 /* almost clear */
+  backdrop-filter: blur(12px) saturate(120%);            /* frosted glass */
+  -webkit-backdrop-filter: blur(12px) saturate(120%);    /* Safari support */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5%;
+
+  /* soft inner and outer glow */
+  box-shadow: 
+    0 0 80px var(--ambient-glow),
+    inset 0 2px 14px rgba(255,255,255,0.15),
+    inset 0 -3px 20px rgba(0,0,0,0.35);
+
+  border: 1.5px solid rgba(255,255,255,0.15);
+
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  box-sizing: border-box;
+  overflow: visible;
+
+  /* the pulsing animation stays exactly the same */
+  animation: pulseGlow 6s ease-in-out infinite;
+
+  z-index: 20;
+}
 .poster.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.emboss {
-  position: relative;
-  color: var(--text-color);
-  text-shadow:
-    1px 1px 2px rgba(0,0,0,0.7),
-    -1px -1px 2px rgba(255,255,255,0.1);
-}
-
 .intro {
   font-family: 'Sawarabi Mincho', serif;
-  font-size: 60px;
   font-weight: 800;
-  margin-bottom: 15px;
   color: var(--intro-color);
-  text-shadow:
-    2px 2px 6px rgba(0,0,0,0.7),
-    0 0 20px rgba(255,100,100,0.4);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7),0 0 20px rgba(255,100,100,0.4);
+  font-size: calc(8vmin + 8px);
+  margin-bottom: 1vmin;
 }
 
 .tagline {
   font-family: 'Sawarabi Mincho', serif;
-  font-size: 24px;
-  margin-bottom: 40px;
-  letter-spacing: 1.5px;
   color: var(--tagline-color);
-  text-shadow:
-    1px 1px 3px rgba(0,0,0,0.7),
-    0 0 8px rgba(255,120,120,0.25);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7),0 0 8px rgba(255,120,120,0.25);
+  font-size: calc(2.5vmin + 2px);
+  margin-bottom: 2vmin;
 }
 
 .teaser {
-  font-size: 20px;
-  line-height: 2;
+  font-size: calc(2vmin + 2px);
   color: var(--text-color);
-  margin-bottom: 50px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  line-height: 1.6;
+  margin-bottom: 3vmin;
 }
 
 .come {
   display: inline-block;
-  padding: 18px 40px;
-  border-radius: 14px;
-  font-size: 22px;
+  padding: 1vmin 3vmin;
+  font-size: calc(2vmin + 2px);
   font-weight: 600;
+  border-radius: 1vmin;
   background: linear-gradient(145deg, var(--button-bg-start), var(--button-bg-end));
   color: var(--button-text-color);
   text-decoration: none;
-  box-shadow:
-    0 4px 15px var(--ambient-glow),
-    inset 0 2px 6px rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px var(--ambient-glow), inset 0 2px 6px rgba(255,255,255,0.1);
   transition: all 0.3s ease;
 }
-
 .come:hover {
-  color: #fff;
-  box-shadow:
-    0 0 25px var(--button-hover-glow1),
-    0 0 50px var(--button-hover-glow2),
-    inset 0 2px 8px rgba(255,255,255,0.3);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--button-hover-glow1),0 0 50px var(--button-hover-glow2);
 }
 
-.info-btn {
-  padding: 12px 18px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  background: var(--info-btn-bg);
-  color: var(--info-btn-text);
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-.info-btn:hover {
-  background: var(--info-btn-hover-bg);
-  color: var(--button-text-color);
-}
-
-/* Top-right container for Faqs + Swag */
-.top-right-buttons {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-
-/* Top-left expand button */
-#expandBtn {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  background: rgba(255,255,255,0.1);
-  color: #ffe5d3;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 100;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  transition: all 0.3s ease;
-}
-#expandBtn:hover {
-  background: rgba(255,255,255,0.2);
-  transform: scale(1.1);
-}
-
-/* Minimize button for poster */
-.minimize-btn {
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  color: var(--text-color);
-  cursor: pointer;
-  background: rgba(255,255,255,0.1);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
-  position: absolute;
-  z-index: 2;
-}
-.minimize-btn:hover {
-  background: rgba(255,255,255,0.2);
-  transform: scale(1.1);
-}
-
-/* Overlay styles */
+/* Merch Overlay */
 .overlay {
   position: fixed;
   display: none;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(50, 10, 12, 0.95), rgba(20, 5, 6, 0.85));
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgb(50,10,12), rgb(20,5,6));
   z-index: 20;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   padding: 50px 20px;
   box-sizing: border-box;
 }
@@ -282,52 +190,29 @@ body::before {
   max-width: 700px;
   margin: auto;
   color: var(--text-color);
-  text-align: left;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.overlay-content h2 {
-  margin-top: 30px;
-  font-size: 28px;
-}
-
-.overlay-content ul {
-  list-style: disc;
-  margin-left: 20px;
 }
 
 .close-btn {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 20px; right: 30px;
+  width: 50px; height: 50px;
+  display: flex; justify-content: center; align-items: center;
   font-size: 32px;
   color: var(--text-color);
   cursor: pointer;
   border-radius: 50%;
   background: var(--close-btn-bg);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
-  border: 1px solid rgba(255,255,255,0.25);
   transition: all 0.3s ease;
 }
-
 .close-btn:hover {
   background: var(--close-btn-hover-bg);
   color: var(--close-btn-hover-color);
   transform: scale(1.1);
-  box-shadow: 0 6px 40px rgba(255,50,50,0.5);
 }
 
-/* Merch grid */
 .merch-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
   gap: 30px;
   margin-top: 30px;
 }
@@ -337,286 +222,188 @@ body::before {
   border-radius: 20px;
   overflow: hidden;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .merch-item img {
   width: 100%;
   display: block;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease;
 }
-
 .merch-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(255,50,50,0.5);
 }
+.merch-info { padding: 12px 8px; }
+.merch-info h3 { margin: 8px 0 4px; font-size: 18px; }
+.merch-info p { font-size: 14px; opacity: 0.8; margin:0 0 6px; }
+.merch-info span { font-weight:600; font-size:16px; color:var(--intro-color); }
 
-.merch-info {
-  padding: 12px 8px;
-  color: var(--text-color);
-}
-
-.merch-info h3 {
-  margin: 8px 0 4px;
-  font-size: 18px;
-}
-
-.merch-info p {
-  font-size: 14px;
-  opacity: 0.8;
-  margin: 0 0 6px;
-}
-
-.merch-info span {
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--intro-color);
-}
-
-@media (max-width: 650px) {
-  .poster { 
-    padding: 30px 15px;
-    max-width: 100%;
-  }
-
-  .intro { font-size: 36px; }
-  .tagline { font-size: clamp(16px, 4vw, 20px); letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .teaser { font-size: 16px; line-height: 1.8; }
-  .come { font-size: 20px; padding: 16px 32px; }
-  .overlay-content { font-size: 16px; }
-}
 </style>
 </head>
 <body>
 
-<div class="poster">
-  <span class="minimize-btn">&#8211;</span>
-  
-  <div class="intro emboss">1215</div>
-  
-  <div class="tagline emboss">
-    Not an accelerator. <br>
-    Not an incubator. <br>
-    Something new.
-  </div>
-  
-  <div class="teaser emboss">
-   <p>
-  Get chosen. Get the <a href="javascript:void(0);" 
-                          onclick="openMerchOverlay();" 
-                          style="cursor:pointer; color:blue; text-decoration:underline;">
-    merch
-  </a>. Enter the circle.
-</p>
-    <p>Not everyone gets in. Will you?</p>
-  </div>
-  
-  <a href="mailto:membership@join1215.com?subject=Membership Application&body=Hi there,%0A%0AI’m interested in joining your salon-style conversations. Here’s a bit about me:%0A%0A• Name:%0A• What I’m curious about:%0A• How I found you:%0A%0ALooking forward to hearing from you!" class="come">
-    Join
-  </a>
-</div>
-
-<!-- Top-right buttons -->
-<div class="top-right-buttons">
-  <!-- <button class="info-btn">faqs</button> -->
-  <button id="merchBtn" class="info-btn">merch</button>
-
-<  <button id="merchBtn" 
-        style="background:none; border:none; padding:0; cursor:pointer;">
-  <img src="https://cdn-icons-png.freepik.com/256/18546/18546569.png?semt=ais_white_label" 
-       alt="Official Merchandise" 
-       style="width:0px; height:0px; display:block;">
-</button>
- 
-  
-</div>
-
-<!-- Top-left expand button -->
-<button id="expandBtn">+</button>
-
-<!-- Info Overlay -->
-<div id="overlay" class="overlay">
-  <div class="overlay-content">
-    <span class="close-btn">&times;</span>
-    <h2>About Us</h2>
-<p>1215 is a gathering place for curious people — makers, thinkers, and anyone with a spark of an idea. We explore concepts together and, when the timing is right, help them grow into small experiments, prototypes, or early-stage ventures. It’s part salon, part idea studio, all imagination, built on shared curiosity and collective support.</p>
-    
-      <h2>Who's behind 1215</h2>
-    <p>A small team of curators, designers, and community builders keeps 1215 running behind the scenes, shaping each session and ensuring the space stays welcoming, inspiring, and safe.</p>
-    
-    <h2>Who can apply</h2>
-    <p>Anyone with genuine curiosity — no specific background required.</p>
-
-    <h2>What happens to ideas</h2>
-<p>
-Some ideas stay conversations. Others grow through guidance, collaboration, and light-touch support. When something evolves into a project or venture, early contributors may share in its success through simple, transparent agreements. No pitch decks. No pressure. Just space, conversations, and the right people to help ideas take shape.</p>
-
-    <h2>Does 1215 help ideas become real?</h2>
-
-    <p>Yes — but not like a traditional incubator. Ideas here grow through conversation, curiosity, and voluntary collaboration. When something wants to take shape, we help it take its first steps without cohorts, KPIs, or formal programs — just the right people at the right moment. Think of it less like rows of seedlings planted on a schedule, and more like a wildflower meadow — ideas emerge organically, and the community nurtures the ones ready to bloom.
-    
-    </p>
-
-    <h2>Is it free</h2>
-    <p>Yes — membership is currently free for those who want to take part. This may evolve over time.</p>
-
-    <h2>How does 1215 make money</h2>
-    <p>For now, it doesn’t. 1215 is nurtured by the people building it — a community first, a business second. As ideas bloom into projects or ventures, simple, fair revenue-sharing may follow. Growth happens the same way ideas do here: slowly, transparently, and only when the time is right.</p>
-   
-    <h2>Where are the sessions held?</h2>
-    <p>Sessions take place in inspiring physical spaces close to our home base, with the potential to grow into new locations as the community expands.</p>
-
-    <h2>Virtual sessions</h2>
-    <p>All our sessions are in person — we don’t do virtual meetups.</p>
-    
-      <h2>Are drinks free?</h2>
-    <p>Not exactly. We encourage each person to buy a drink for someone else — an easy way to spark conversation and build new connections.</p>
-    
-     <h2>Inclusivity & Safety</h2>
-    <p>1215 is committed to being a safe, inclusive, and welcoming environment for people of all backgrounds, ages, and experiences. Respect, openness, and curiosity guide everything we do.</p>
-
-    
+<div class="poster-wrapper">
+  <div class="poster">
+    <div class="intro">1215</div>
+    <div class="tagline">Not an accelerator.<br>Not an incubator.<br>Something new.</div>
+    <div class="teaser">
+      Get chosen. Get the <a href="javascript:void(0);" onclick="openMerchOverlay();" style="color:inherit;text-decoration:underline;">merch</a>. Enter the circle.<br>
+      Not everyone gets in. Will you?
+    </div>
+    <a href="mailto:membership@join1215.com" class="come">Join</a>
   </div>
 </div>
 
 <!-- Merch Overlay -->
 <div id="merchOverlay" class="overlay">
   <div class="overlay-content">
-    <span class="close-btn" id="closeMerch">&times;</span>
-    <!--<h2>1215 Merch</h2>
-    <p>Check out our exclusive merchandise:</p>-->
-    
-   <div class="merch-grid">
-  <div class="merch-item">
-    <img src="images/merc1.png" alt="Merch 1">
-    <div class="merch-info">
-      <h3>1215 Notebook</h3>
-      <p>A quiet ledger for ideas not meant for everyone</p>
-     
+    <span class="close-btn" onclick="closeMerchOverlay()">&times;</span>
+
+    <!-- Merch preview container -->
+    <div id="merchPreview" style="display:none; position:relative; text-align:center; margin-bottom:30px;">
+      <img id="merchPreviewImg" src="" alt="Merch Preview" style="max-width:80%; max-height:60vh; border-radius:15px; box-shadow:0 10px 30px rgba(255,50,50,0.5);">
+      
+      <!-- Navigation Arrows -->
+      <div class="merch-nav left" onclick="prevMerch()" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); font-size:2rem; color:#ffbfa0; cursor:pointer;">&#10094;</div>
+      <div class="merch-nav right" onclick="nextMerch()" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); font-size:2rem; color:#ffbfa0; cursor:pointer;">&#10095;</div>
     </div>
-  </div>
-  <div class="merch-item">
-    <img src="images/merc2.png" alt="Merch 2">
-    <div class="merch-info">
-      <h3>1215 Member Card</h3>
-      <p>A discreet key—recognizable only to those who know</p>
-    
-    </div>
-  </div>
-  <div class="merch-item">
-    <img src="images/merc3.png" alt="Merch 3">
-    <div class="merch-info">
-      <h3>1215 Umbrella</h3>
-      <p>Structured protection for the moments that matter</p>
-    
-    </div>
-  </div>
-  <div class="merch-item">
-    <img src="images/merc4.png" alt="Merch 4">
-    <div class="merch-info">
-      <h3>1215 Baseball Cap</h3>
-      <p>A refined emblem for creative movement and those in motion</p>
-     
+
+    <!-- Merch grid -->
+    <div class="merch-grid">
+      <div class="merch-item"><img src="images/merc1.png" alt="Merch 1"><div class="merch-info"><h3>1215 Notebook</h3><p>A quiet ledger for ideas not meant for everyone</p></div></div>
+      <div class="merch-item"><img src="images/merc2.png" alt="Merch 2"><div class="merch-info"><h3>1215 Member Card</h3><p>A discreet key—recognizable only to those who know</p></div></div>
+      <div class="merch-item"><img src="images/merc3.png" alt="Merch 3"><div class="merch-info"><h3>1215 Umbrella</h3><p>Structured protection for the moments that matter</p></div></div>
+      <div class="merch-item"><img src="images/merc4.png" alt="Merch 4"><div class="merch-info"><h3>1215 Baseball Cap</h3><p>A refined emblem for creative movement and those in motion</p></div></div>
     </div>
   </div>
 </div>
-
-<!-- Fullscreen Contained Overlay -->
-<div id="imageOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:1000;overflow:hidden;">
-  <span id="prevBtn" style="position:absolute;left:20px;font-size:60px;color:white;cursor:pointer;">&#10094;</span>
-  <img id="fullscreenImg" src="" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:10px;">
-  <span id="nextBtn" style="position:absolute;right:20px;font-size:60px;color:white;cursor:pointer;">&#10095;</span>
+</div>
 </div>
 
-    
+<!-- Lightbox -->
+<div id="merchLightbox" class="lightbox" style="display:none;">
+  <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-img" src="" alt="Merch Image">
+  <div class="lightbox-nav left" onclick="prevMerch()">&#10094;</div>
+  <div class="lightbox-nav right" onclick="nextMerch()">&#10095;</div>
+</div>
+
+
 
 <script>
-// Select all merch images
-const merchImages = Array.from(document.querySelectorAll('.merch-item img'));
-const imageOverlay = document.getElementById('imageOverlay');
-const fullscreenImg = document.getElementById('fullscreenImg');
-let currentIndex = 0;
-
-merchImages.forEach((img, index) => {
-  img.style.cursor = 'pointer';
-  img.addEventListener('click', () => {
-    currentIndex = index;
-    fullscreenImg.src = img.src;
-    imageOverlay.style.display = 'flex';
-  });
+window.addEventListener('DOMContentLoaded', () => {
+  // Show poster animation
+  const poster = document.querySelector('.poster');
+  poster.classList.add('visible');
 });
 
-// Arrow navigation
-document.getElementById('prevBtn').addEventListener('click', (e) => {
-  e.stopPropagation(); // prevent closing overlay
-  currentIndex = (currentIndex - 1 + merchImages.length) % merchImages.length;
-  fullscreenImg.src = merchImages[currentIndex].src;
-});
-document.getElementById('nextBtn').addEventListener('click', (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex + 1) % merchImages.length;
-  fullscreenImg.src = merchImages[currentIndex].src;
-});
-
-// Click overlay → close
-imageOverlay.addEventListener('click', () => {
-  imageOverlay.style.display = 'none';
-});
-
-
-</script> 
-  
-  </div>
-  </div>
-</div>
-
-<script>
-const overlay = document.getElementById('overlay');
-const merchOverlay = document.getElementById('merchOverlay');
-const closeBtns = document.querySelectorAll('.close-btn');
-const poster = document.querySelector('.poster');
-const expandBtn = document.getElementById('expandBtn');
-const minimizeBtn = document.querySelector('.minimize-btn');
-
-// OPTIONAL FAQ BUTTON (only runs if it's actually in the HTML)
-const faqBtn = document.getElementById('faqBtn');
-if (faqBtn) {
-  faqBtn.addEventListener('click', () => {
-    overlay.style.display = 'block';
-  });
+// Merch overlay functions
+function openMerchOverlay() {
+  const overlay = document.getElementById('merchOverlay');
+  overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
 }
 
-// MERCH BUTTON (always present)
-const merchBtn = document.getElementById('merchBtn');
-merchBtn.addEventListener('click', () => {
-  merchOverlay.style.display = 'block';
-});
+function closeMerchOverlay() {
+  const overlay = document.getElementById('merchOverlay');
+  overlay.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+</script>
 
-// Close buttons (close *both* overlays safely)
-closeBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    overlay.style.display = 'none';
-    merchOverlay.style.display = 'none';
+<script>
+let currentMerchIndex = 0;
+let merchItems;
+
+function openMerchOverlay() {
+  document.getElementById('merchOverlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMerchOverlay() {
+  document.getElementById('merchOverlay').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  document.getElementById('merchPreview').style.display = 'none';
+}
+
+// Setup merch preview and navigation
+document.addEventListener('DOMContentLoaded', () => {
+  merchItems = Array.from(document.querySelectorAll('.merch-item img'));
+  const preview = document.getElementById('merchPreview');
+  const previewImg = document.getElementById('merchPreviewImg');
+
+  merchItems.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentMerchIndex = index;
+      previewImg.src = img.src;
+      preview.style.display = 'block';
+      preview.scrollIntoView({behavior:'smooth'});
+    });
   });
 });
 
-// Minimize hero
-minimizeBtn.addEventListener('click', () => {
-  poster.style.display = 'none';
-  expandBtn.style.display = 'flex';
-});
+function nextMerch() {
+  if (!merchItems) return;
+  currentMerchIndex = (currentMerchIndex + 1) % merchItems.length;
+  document.getElementById('merchPreviewImg').src = merchItems[currentMerchIndex].src;
+}
 
-// Expand hero
-expandBtn.addEventListener('click', () => {
-  poster.style.display = 'block';
-  expandBtn.style.display = 'none';
-});
+function prevMerch() {
+  if (!merchItems) return;
+  currentMerchIndex = (currentMerchIndex - 1 + merchItems.length) % merchItems.length;
+  document.getElementById('merchPreviewImg').src = merchItems[currentMerchIndex].src;
+}
+</script>
 
-// Fade-in on load
-window.addEventListener('load', () => {
-  poster.classList.add('visible');
+<script>
+// Function to center the poster and scale fonts slightly on mobile
+function centerPoster() {
+  const wrapper = document.querySelector('.poster-wrapper');
+  const intro = document.querySelector('.intro');
+  const tagline = document.querySelector('.tagline');
+  const teaser = document.querySelector('.teaser');
+  const joinBtn = document.querySelector('.come');
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  // Slight font increase for mobile, but modest
+  if (vh < 600 || vw < 500) {
+    intro.style.fontSize = `calc(9vmin + 8px)`;    // small increase
+    tagline.style.fontSize = `calc(3vmin + 2px)`;  
+    teaser.style.fontSize = `calc(2.2vmin + 2px)`; 
+    joinBtn.style.fontSize = `calc(2.2vmin + 2px)`; 
+    joinBtn.style.padding = `1.5vmin 3.5vmin`;
+  } else {
+    intro.style.fontSize = `calc(8vmin + 8px)`;
+    tagline.style.fontSize = `calc(2.5vmin + 2px)`;
+    teaser.style.fontSize = `calc(2vmin + 2px)`;
+    joinBtn.style.fontSize = `calc(2vmin + 2px)`;
+    joinBtn.style.padding = `1vmin 3vmin`;
+  }
+
+  // Recalculate poster size after font change
+  const rect = wrapper.getBoundingClientRect();
+  const posterWidth = rect.width;
+  const posterHeight = rect.height;
+
+  // Center dynamically
+  const left = (vw - posterWidth) / 2;
+  const top = (vh - posterHeight) / 2;
+
+  wrapper.style.position = 'absolute';
+  wrapper.style.left = `${left}px`;
+  wrapper.style.top = `${top}px`;
+}
+
+// Center initially
+centerPoster();
+
+// Re-center and rescale on window resize
+window.addEventListener('resize', () => {
+  requestAnimationFrame(centerPoster);
 });
 </script>
 
