@@ -333,6 +333,17 @@ body::before {
   .come { font-size: 20px; padding: 16px 32px; }
   .overlay-content { font-size: 16px; }
 }
+
+.clickable-text {
+  color: inherit;        /* Matches surrounding text color */
+  text-decoration: none; /* No underline */
+  cursor: pointer;       /* Shows pointer on hover */
+}
+
+.clickable-text:hover {
+  text-decoration: underline; /* Optional: subtle effect on hover */
+}
+  
 </style>
 </head>
 <body>
@@ -346,9 +357,9 @@ body::before {
     Something new.
   </div>
   <div class="teaser emboss">
-    <p>
-      Get chosen. Get the <a href="javascript:void(0);" onclick="openMerchOverlay();" style="cursor:pointer; color:blue; text-decoration:underline;">merch</a>. Enter the circle.
-    </p>
+  <p>
+  Get chosen. Get the <a href="javascript:void(0);" onclick="openMerchOverlay();" style="cursor:pointer; color:inherit; text-decoration:underline;">merch</a>. Enter the circle.
+</p>
     <p>Not everyone gets in. Will you?</p>
   </div>
   <a href="mailto:membership@join1215.com?subject=Membership Application&body=Hi there,%0A%0AI’m interested in joining your salon-style conversations. Here’s a bit about me:%0A%0A• Name:%0A• What I’m curious about:%0A%• How I found you:%0A%0ALooking forward to hearing from you!" class="come">
