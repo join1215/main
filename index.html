@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1215 Responsive Circle</title>
+<title>1215</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
 
 <style>
@@ -405,6 +405,63 @@ centerPoster();
 window.addEventListener('resize', () => {
   requestAnimationFrame(centerPoster);
 });
+</script>
+
+
+  <script>
+(function() {
+  const wrapper = document.querySelector('.poster-wrapper');
+  let isDragging = false;
+  let startX, startY;
+  let initialLeft, initialTop;
+
+  // Start drag
+  function startDrag(e) {
+    isDragging = true;
+    wrapper.classList.add('dragging');
+
+    const evt = e.touches ? e.touches[0] : e;
+
+    startX = evt.clientX;
+    startY = evt.clientY;
+
+    const rect = wrapper.getBoundingClientRect();
+    initialLeft = rect.left;
+    initialTop = rect.top;
+
+    // Prevent scroll dragging on mobile
+    e.preventDefault();
+  }
+
+  // Drag move
+  function moveDrag(e) {
+    if (!isDragging) return;
+
+    const evt = e.touches ? e.touches[0] : e;
+
+    const dx = evt.clientX - startX;
+    const dy = evt.clientY - startY;
+
+    wrapper.style.left = initialLeft + dx + "px";
+    wrapper.style.top = initialTop + dy + "px";
+  }
+
+  // End drag
+  function endDrag() {
+    isDragging = false;
+    wrapper.classList.remove('dragging');
+  }
+
+  // Mouse handlers
+  wrapper.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', moveDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch handlers
+  wrapper.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('touchmove', moveDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+})();
 </script>
 
 </body>
