@@ -596,5 +596,207 @@ window.addEventListener('resize', () => {
 })();
 </script>
 
+  <script>
+(function() {
+  const wrapper = document.querySelector('.poster-wrapper');
+
+  let isDragging = false;
+  let currentX = 0;
+  let currentY = 0;
+  let startDragX = 0;
+  let startDragY = 0;
+
+  const amplitude = 10; // floating distance
+  const speed = 0.002;  // floating speed
+  let startTime = null;
+
+  // --- CENTER IN UI ---
+  function centerWrapper() {
+    const rect = wrapper.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+
+    const viewportW = window.innerWidth;
+    const viewportH = window.innerHeight;
+
+    // Use absolute positioning to visually center
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = (viewportW - w) / 2 + 'px';
+    wrapper.style.top  = (viewportH - h) / 2 + 'px';
+
+    // Reset transform
+    currentX = 0;
+    currentY = 0;
+    wrapper.style.transform = `translate(0px, 0px)`;
+  }
+
+  centerWrapper();
+
+  window.addEventListener('resize', centerWrapper);
+
+  // --- DRAG HANDLERS ---
+  function startDrag(e) {
+    isDragging = true;
+    const evt = e.touches ? e.touches[0] : e;
+    startDragX = evt.clientX - currentX;
+    startDragY = evt.clientY - currentY;
+  }
+
+  function moveDrag(e) {
+    if (!isDragging) return;
+    const evt = e.touches ? e.touches[0] : e;
+    currentX = evt.clientX - startDragX;
+    currentY = evt.clientY - startDragY;
+    wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
+
+  function endDrag() {
+    isDragging = false;
+  }
+
+  wrapper.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', moveDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  wrapper.addEventListener('touchstart', startDrag, { passive: true });
+  document.addEventListener('touchmove', moveDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+
+  // --- FLOATING ANIMATION ---
+  function animate(time) {
+    if (!startTime) startTime = time;
+    const t = time - startTime;
+
+    if (!isDragging) {
+      const offsetX = Math.sin(t * speed) * amplitude;
+      const offsetY = Math.cos(t * speed) * amplitude;
+      wrapper.style.transform = `translate(${currentX + offsetX}px, ${currentY + offsetY}px)`;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
+</script>
+
+<script>
+// -------------------------
+// CONFIG: You control these
+// -------------------------
+const joinWindows = [
+  { start: "12:00", end: "13:00" }, // 12–1 PM
+  { start: "20:00", end: "21:00" }  // 8–9 PM
+];
+
+const accessKey = "7Q92-FN4H"; // <-- Static, hard-coded key
+
+const joinButton = document.querySelector('.come');
+
+// Create countdown element
+const countdownEl = document.createElement("div");
+countdownEl.style.color = "#ffc6b0";
+countdownEl.style.marginTop = "12px";
+countdownEl.style.fontSize = "1.2rem";
+countdownEl.style.textShadow = "0 0 8px rgba(255,100,100,0.4)";
+joinButton.insertAdjacentElement("afterend", countdownEl);
+
+// Create key element
+const keyEl = document.createElement("div");
+keyEl.style.marginTop = "8px";
+keyEl.style.color = "#ffbfa0";
+keyEl.style.fontSize = "1.1rem";
+keyEl.style.fontWeight = "600";
+keyEl.style.textShadow = "0 0 8px rgba(255,80,80,0.4)";
+joinButton.insertAdjacentElement("afterend", keyEl);
+
+// -------------------------
+// Utility: time helpers
+// -------------------------
+function timeToMinutes(str) {
+  const [h, m] = str.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function getNowMinutes() {
+  const d = new Date();
+  return d.getHours()*60 + d.getMinutes();
+}
+
+// -------------------------
+// Core: Check window
+// -------------------------
+function isWindowOpen() {
+  const now = getNowMinutes();
+  return joinWindows.some(w => {
+    const start = timeToMinutes(w.start);
+    const end   = timeToMinutes(w.end);
+    return now >= start && now <= end;
+  });
+}
+
+// -------------------------
+// Find next opening window
+// -------------------------
+function getNextWindowTime() {
+  const now = new Date();
+  const nowMin = getNowMinutes();
+
+  // Convert each to today or tomorrow
+  const candidates = joinWindows.map(w => {
+    let [h,m] = w.start.split(":").map(Number);
+    const when = new Date();
+    when.setHours(h, m, 0, 0);
+
+    // If time already passed today, use tomorrow instead
+    if (timeToMinutes(w.start) <= nowMin) when.setDate(when.getDate()+1);
+
+    return when;
+  });
+
+  // Return soonest time
+  return candidates.sort((a,b) => a - b)[0];
+}
+
+// -------------------------
+// Update UI every second
+// -------------------------
+function updateJoinState() {
+  const open = isWindowOpen();
+
+  if (open) {
+    // Button active
+    joinButton.style.opacity = "1";
+    joinButton.style.pointerEvents = "auto";
+    joinButton.style.animation = "pulseGlow 3s infinite";
+    
+    // Show static access key
+    keyEl.textContent = "Access Key: " + accessKey;
+    
+    countdownEl.textContent = "";
+  } else {
+    // Button disabled
+    joinButton.style.opacity = "0.35";
+    joinButton.style.pointerEvents = "none";
+    joinButton.style.animation = "none";
+
+    keyEl.textContent = ""; // hide key outside window
+
+    // Countdown
+    const next = getNextWindowTime();
+    const diff = Math.floor((next - new Date()) / 1000);
+    const h = Math.floor(diff/3600);
+    const m = Math.floor((diff%3600)/60);
+    const s = diff%60;
+
+    countdownEl.textContent =
+      `Next opening in ${h}h ${m}m ${s}s`;
+  }
+}
+
+setInterval(updateJoinState, 1000);
+updateJoinState();
+</script>
+
 </body>
 </html>
