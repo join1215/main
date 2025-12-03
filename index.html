@@ -691,26 +691,18 @@ const joinWindows = [
 const accessKey = "7Q92-FN4H"; // <-- Static, hard-coded key
 
 const joinButton = document.querySelector('.come');
-const poster = document.querySelector('.poster'); // Make sure this exists in your HTML
 
-// Countdown element
-const countdownEl = document.createElement("div");
-countdownEl.style.color = "#ffc6b0";
-countdownEl.style.marginTop = "6px";
-countdownEl.style.fontSize = "1rem";
-countdownEl.style.textAlign = "center";
-countdownEl.style.textShadow = "0 0 6px rgba(255,100,100,0.4)";
-poster.appendChild(countdownEl);
-
-// Key element
-const keyEl = document.createElement("div");
-keyEl.style.marginTop = "4px";
-keyEl.style.color = "#ffbfa0";
-keyEl.style.fontSize = "0.9rem";
-keyEl.style.fontWeight = "600";
-keyEl.style.textAlign = "center";
-keyEl.style.textShadow = "0 0 6px rgba(255,80,80,0.4)";
-poster.appendChild(keyEl);
+// -------------------------
+// Info element (countdown / key)
+// -------------------------
+const infoEl = document.createElement("div");
+infoEl.style.color = "#ffc6b0";
+infoEl.style.marginTop = "8px";
+infoEl.style.fontSize = "1.1rem";
+infoEl.style.fontWeight = "600";
+infoEl.style.textAlign = "center";
+infoEl.style.textShadow = "0 0 8px rgba(255,100,100,0.4)";
+joinButton.insertAdjacentElement("afterend", infoEl);
 
 // -------------------------
 // Utility: time helpers
@@ -722,18 +714,18 @@ function timeToMinutes(str) {
 
 function getNowMinutes() {
   const d = new Date();
-  return d.getHours()*60 + d.getMinutes();
+  return d.getHours() * 60 + d.getMinutes();
 }
 
 // -------------------------
-// Core: Check window
+// Check if window is open
 // -------------------------
 function isWindowOpen() {
   const now = getNowMinutes();
   return joinWindows.some(w => {
     const start = timeToMinutes(w.start);
     const end   = timeToMinutes(w.end);
-    return now >= start && now <= end;
+    return now >= start && now < end; // end exclusive
   });
 }
 
@@ -745,14 +737,15 @@ function getNextWindowTime() {
   const nowMin = getNowMinutes();
 
   const candidates = joinWindows.map(w => {
-    let [h,m] = w.start.split(":").map(Number);
+    const [h, m] = w.start.split(":").map(Number);
     const when = new Date();
     when.setHours(h, m, 0, 0);
-    if (timeToMinutes(w.start) <= nowMin) when.setDate(when.getDate()+1);
+
+    if (timeToMinutes(w.start) <= nowMin) when.setDate(when.getDate() + 1);
     return when;
   });
 
-  return candidates.sort((a,b) => a - b)[0];
+  return candidates.sort((a, b) => a - b)[0];
 }
 
 // -------------------------
@@ -762,29 +755,33 @@ function updateJoinState() {
   const open = isWindowOpen();
 
   if (open) {
+    // Button active
     joinButton.style.opacity = "1";
     joinButton.style.pointerEvents = "auto";
     joinButton.style.animation = "pulseGlow 3s infinite";
 
-    keyEl.textContent = "Access Key: " + accessKey;
-    countdownEl.textContent = "";
+    // Show access key
+    infoEl.textContent = "Access Key: " + accessKey;
   } else {
+    // Button disabled
     joinButton.style.opacity = "0.35";
     joinButton.style.pointerEvents = "none";
     joinButton.style.animation = "none";
 
-    keyEl.textContent = "";
-
+    // Countdown to next window
     const next = getNextWindowTime();
     const diff = Math.floor((next - new Date()) / 1000);
-    const h = Math.floor(diff/3600);
-    const m = Math.floor((diff%3600)/60);
-    const s = diff%60;
+    const h = Math.floor(diff / 3600);
+    const m = Math.floor((diff % 3600) / 60);
+    const s = diff % 60;
 
-    countdownEl.textContent = `Next opening in ${h}h ${m}m ${s}s`;
+    infoEl.textContent = `Next opening in ${h}h ${m}m ${s}s`;
   }
 }
 
+// -------------------------
+// Run interval
+// -------------------------
 setInterval(updateJoinState, 1000);
 updateJoinState();
 </script>
