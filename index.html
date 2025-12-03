@@ -693,23 +693,25 @@ const accessKey = "7Q92-FN4H"; // <-- Static, hard-coded key
 
 const joinButton = document.querySelector('.come');
 
-// Create countdown element
+// Countdown element
 const countdownEl = document.createElement("div");
 countdownEl.style.color = "#ffc6b0";
-countdownEl.style.marginTop = "12px";
-countdownEl.style.fontSize = "1.2rem";
-countdownEl.style.textShadow = "0 0 8px rgba(255,100,100,0.4)";
-joinButton.insertAdjacentElement("afterend", countdownEl);
+countdownEl.style.marginTop = "6px";        // smaller spacing
+countdownEl.style.fontSize = "1rem";       // smaller text
+countdownEl.style.textAlign = "center";    // center inside circle
+countdownEl.style.textShadow = "0 0 6px rgba(255,100,100,0.4)";
+poster.appendChild(countdownEl);
 
-// Create key element
+// Key element
 const keyEl = document.createElement("div");
-keyEl.style.marginTop = "8px";
+keyEl.style.marginTop = "4px";             // smaller spacing
 keyEl.style.color = "#ffbfa0";
-keyEl.style.fontSize = "1.1rem";
+keyEl.style.fontSize = "0.9rem";           // smaller text
 keyEl.style.fontWeight = "600";
-keyEl.style.textShadow = "0 0 8px rgba(255,80,80,0.4)";
-joinButton.insertAdjacentElement("afterend", keyEl);
-
+keyEl.style.textAlign = "center";          // center inside circle
+keyEl.style.textShadow = "0 0 6px rgba(255,80,80,0.4)";
+poster.appendChild(keyEl);
+  
 // -------------------------
 // Utility: time helpers
 // -------------------------
