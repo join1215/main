@@ -679,7 +679,6 @@ window.addEventListener('resize', () => {
   requestAnimationFrame(animate);
 })();
 </script>
-
 <script>
 // -------------------------
 // CONFIG: You control these
@@ -692,26 +691,27 @@ const joinWindows = [
 const accessKey = "7Q92-FN4H"; // <-- Static, hard-coded key
 
 const joinButton = document.querySelector('.come');
+const poster = document.querySelector('.poster'); // Make sure this exists in your HTML
 
 // Countdown element
 const countdownEl = document.createElement("div");
 countdownEl.style.color = "#ffc6b0";
-countdownEl.style.marginTop = "6px";        // smaller spacing
-countdownEl.style.fontSize = "1rem";       // smaller text
-countdownEl.style.textAlign = "center";    // center inside circle
+countdownEl.style.marginTop = "6px";
+countdownEl.style.fontSize = "1rem";
+countdownEl.style.textAlign = "center";
 countdownEl.style.textShadow = "0 0 6px rgba(255,100,100,0.4)";
 poster.appendChild(countdownEl);
 
 // Key element
 const keyEl = document.createElement("div");
-keyEl.style.marginTop = "4px";             // smaller spacing
+keyEl.style.marginTop = "4px";
 keyEl.style.color = "#ffbfa0";
-keyEl.style.fontSize = "0.9rem";           // smaller text
+keyEl.style.fontSize = "0.9rem";
 keyEl.style.fontWeight = "600";
-keyEl.style.textAlign = "center";          // center inside circle
+keyEl.style.textAlign = "center";
 keyEl.style.textShadow = "0 0 6px rgba(255,80,80,0.4)";
 poster.appendChild(keyEl);
-  
+
 // -------------------------
 // Utility: time helpers
 // -------------------------
@@ -744,19 +744,14 @@ function getNextWindowTime() {
   const now = new Date();
   const nowMin = getNowMinutes();
 
-  // Convert each to today or tomorrow
   const candidates = joinWindows.map(w => {
     let [h,m] = w.start.split(":").map(Number);
     const when = new Date();
     when.setHours(h, m, 0, 0);
-
-    // If time already passed today, use tomorrow instead
     if (timeToMinutes(w.start) <= nowMin) when.setDate(when.getDate()+1);
-
     return when;
   });
 
-  // Return soonest time
   return candidates.sort((a,b) => a - b)[0];
 }
 
@@ -767,32 +762,26 @@ function updateJoinState() {
   const open = isWindowOpen();
 
   if (open) {
-    // Button active
     joinButton.style.opacity = "1";
     joinButton.style.pointerEvents = "auto";
     joinButton.style.animation = "pulseGlow 3s infinite";
-    
-    // Show static access key
+
     keyEl.textContent = "Access Key: " + accessKey;
-    
     countdownEl.textContent = "";
   } else {
-    // Button disabled
     joinButton.style.opacity = "0.35";
     joinButton.style.pointerEvents = "none";
     joinButton.style.animation = "none";
 
-    keyEl.textContent = ""; // hide key outside window
+    keyEl.textContent = "";
 
-    // Countdown
     const next = getNextWindowTime();
     const diff = Math.floor((next - new Date()) / 1000);
     const h = Math.floor(diff/3600);
     const m = Math.floor((diff%3600)/60);
     const s = diff%60;
 
-    countdownEl.textContent =
-      `Next opening in ${h}h ${m}m ${s}s`;
+    countdownEl.textContent = `Next opening in ${h}h ${m}m ${s}s`;
   }
 }
 
@@ -800,5 +789,6 @@ setInterval(updateJoinState, 1000);
 updateJoinState();
 </script>
 
+  
 </body>
 </html>
