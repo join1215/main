@@ -412,43 +412,69 @@ window.addEventListener('resize', () => {
 (function() {
   const wrapper = document.querySelector('.poster-wrapper');
   let isDragging = false;
+  let didMove = false;        // <— NEW: track if moved
   let startX, startY;
   let currentX = 0, currentY = 0;
 
+  const CLICK_THRESHOLD = 6;   // small movement allowed for tap
+
   function startDrag(e) {
+    didMove = false;          // reset tap flag
     isDragging = true;
     wrapper.classList.add('dragging');
 
     const evt = e.touches ? e.touches[0] : e;
     startX = evt.clientX - currentX;
     startY = evt.clientY - currentY;
-
-    e.preventDefault();
   }
 
   function moveDrag(e) {
     if (!isDragging) return;
 
     const evt = e.touches ? e.touches[0] : e;
-    currentX = evt.clientX - startX;
-    currentY = evt.clientY - startY;
 
-    // GPU-accelerated → no glitching
+    const newX = evt.clientX - startX;
+    const newY = evt.clientY - startY;
+
+    // detect any real movement
+    if (Math.abs(newX - currentX) > CLICK_THRESHOLD ||
+        Math.abs(newY - currentY) > CLICK_THRESHOLD) {
+      didMove = true;
+    }
+
+    currentX = newX;
+    currentY = newY;
+
     wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+    e.preventDefault(); // only block scrolling while actually dragging
   }
 
-  function endDrag() {
-    isDragging = false;
+  function endDrag(e) {
     wrapper.classList.remove('dragging');
+
+    // If the user did NOT drag → let it be a click
+    if (!didMove) {
+      // allow underlying links/buttons to work
+      return;
+    }
+
+    // If dragged → block click
+    e.preventDefault();
+    
+    isDragging = false;
   }
 
+
+  // Listeners
   wrapper.addEventListener('mousedown', startDrag);
   document.addEventListener('mousemove', moveDrag);
   document.addEventListener('mouseup', endDrag);
 
-  wrapper.addEventListener('touchstart', startDrag, { passive: false });
+  wrapper.addEventListener('touchstart', startDrag, { passive: true });
   document.addEventListener('touchmove', moveDrag, { passive: false });
   document.addEventListener('touchend', endDrag);
+
 })();
 </script>
 
