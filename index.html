@@ -478,5 +478,84 @@ window.addEventListener('resize', () => {
 })();
 </script>
 
+  <script>
+(function() {
+  const wrapper = document.querySelector('.poster-wrapper');
+
+  let baseX = 0;
+  let baseY = 0;
+
+  let offsetX = 0;
+  let offsetY = 0;
+
+  let currentX = 0;
+  let currentY = 0;
+
+  let isDragging = false;
+
+  // Floating animation parameters
+  const amplitude = 10;       // max pixels to move in each direction
+  const speed = 0.002;        // speed of oscillation
+  let startTime = null;
+
+  function setInitialPosition() {
+    const rect = wrapper.getBoundingClientRect();
+    baseX = rect.left;
+    baseY = rect.top;
+    currentX = baseX;
+    currentY = baseY;
+    wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
+
+  setInitialPosition();
+
+  // Drag handlers
+  let startDragX, startDragY;
+  wrapper.addEventListener('mousedown', startDrag);
+  wrapper.addEventListener('touchstart', startDrag, { passive: true });
+
+  function startDrag(e) {
+    isDragging = true;
+    const evt = e.touches ? e.touches[0] : e;
+    startDragX = evt.clientX - currentX;
+    startDragY = evt.clientY - currentY;
+  }
+
+  document.addEventListener('mousemove', moveDrag);
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchmove', moveDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+
+  function moveDrag(e) {
+    if (!isDragging) return;
+    const evt = e.touches ? e.touches[0] : e;
+    currentX = evt.clientX - startDragX;
+    currentY = evt.clientY - startDragY;
+    wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
+
+  function endDrag() {
+    isDragging = false;
+  }
+
+  // Floating animation
+  function animate(time) {
+    if (!startTime) startTime = time;
+    const t = time - startTime;
+
+    if (!isDragging) {
+      offsetX = Math.sin(t * speed) * amplitude;
+      offsetY = Math.cos(t * speed) * amplitude;
+      wrapper.style.transform = `translate(${currentX + offsetX}px, ${currentY + offsetY}px)`;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+
+})();
+</script>
+
 </body>
 </html>
