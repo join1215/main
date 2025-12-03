@@ -482,51 +482,41 @@ window.addEventListener('resize', () => {
 (function() {
   const wrapper = document.querySelector('.poster-wrapper');
 
-  let baseX = 0;
-  let baseY = 0;
-
-  let offsetX = 0;
-  let offsetY = 0;
-
+  let isDragging = false;
   let currentX = 0;
   let currentY = 0;
+  let startDragX = 0;
+  let startDragY = 0;
 
-  let isDragging = false;
-
-  // Floating animation parameters
-  const amplitude = 10;       // max pixels to move in each direction
-  const speed = 0.002;        // speed of oscillation
+  const amplitude = 10; // floating distance
+  const speed = 0.002;  // floating speed
   let startTime = null;
 
-  // --- INITIAL CENTERING ---
-  function setInitialPosition() {
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
-
+  // --- CENTER IN UI ---
+  function centerWrapper() {
     const rect = wrapper.getBoundingClientRect();
     const w = rect.width;
     const h = rect.height;
 
-    // center the circle
-    baseX = (screenW - w) / 2;
-    baseY = (screenH - h) / 2;
+    const viewportW = window.innerWidth;
+    const viewportH = window.innerHeight;
 
-    currentX = baseX;
-    currentY = baseY;
+    // Use absolute positioning to visually center
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = (viewportW - w) / 2 + 'px';
+    wrapper.style.top  = (viewportH - h) / 2 + 'px';
 
-    wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    // Reset transform
+    currentX = 0;
+    currentY = 0;
+    wrapper.style.transform = `translate(0px, 0px)`;
   }
 
-  setInitialPosition();
+  centerWrapper();
 
-  window.addEventListener('resize', () => {
-    // re-center on resize
-    setInitialPosition();
-  });
+  window.addEventListener('resize', centerWrapper);
 
   // --- DRAG HANDLERS ---
-  let startDragX, startDragY;
-
   function startDrag(e) {
     isDragging = true;
     const evt = e.touches ? e.touches[0] : e;
@@ -537,10 +527,8 @@ window.addEventListener('resize', () => {
   function moveDrag(e) {
     if (!isDragging) return;
     const evt = e.touches ? e.touches[0] : e;
-
     currentX = evt.clientX - startDragX;
     currentY = evt.clientY - startDragY;
-
     wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
   }
 
@@ -562,9 +550,8 @@ window.addEventListener('resize', () => {
     const t = time - startTime;
 
     if (!isDragging) {
-      offsetX = Math.sin(t * speed) * amplitude;
-      offsetY = Math.cos(t * speed) * amplitude;
-
+      const offsetX = Math.sin(t * speed) * amplitude;
+      const offsetY = Math.cos(t * speed) * amplitude;
       wrapper.style.transform = `translate(${currentX + offsetX}px, ${currentY + offsetY}px)`;
     }
 
