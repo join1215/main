@@ -296,7 +296,7 @@ body::before {
 
 <!-- Merch Overlay -->
 <div id="merchOverlay" class="overlay">
-  <span class="close-btn" onclick="closeMerchOverlay()">&times;</span>
+  <span class="close-btn" id="closeBtn">&times;</span>
   <div class="overlay-content">
     <!-- Merch preview container -->
     <div id="merchPreview" style="display:none; position:relative; text-align:center; margin-bottom:30px;">
@@ -349,6 +349,14 @@ document.addEventListener('DOMContentLoaded', () => {
       preview.style.display = 'block';
       preview.scrollIntoView({behavior:'smooth'});
     });
+  });
+
+  // Add touch-friendly close button handler
+  const closeBtn = document.getElementById('closeBtn');
+  closeBtn.addEventListener('click', closeMerchOverlay);
+  closeBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    closeMerchOverlay();
   });
 });
 
