@@ -413,9 +413,9 @@ body::after {
   <div class="overlay-content">
     <div class="merch-carousel">
       <div class="merch-carousel-main">
-        <div class="merch-carousel-nav left" id="prevBtn">&#10094;</div>
+        <div class="merch-carousel-nav left" onclick="window.prevCarousel()">&#10094;</div>
         <img id="carouselImage" class="merch-carousel-image" src="images/merc1.png" alt="Merch">
-        <div class="merch-carousel-nav right" id="nextBtn">&#10095;</div>
+        <div class="merch-carousel-nav right" onclick="window.nextCarousel()">&#10095;</div>
       </div>
       
       <div class="merch-carousel-info">
@@ -424,10 +424,10 @@ body::after {
       </div>
       
       <div class="merch-carousel-dots" id="carouselDots">
-        <span class="merch-dot active" data-slide="0"></span>
-        <span class="merch-dot" data-slide="1"></span>
-        <span class="merch-dot" data-slide="2"></span>
-        <span class="merch-dot" data-slide="3"></span>
+        <span class="merch-dot active" onclick="window.goToSlide(0)"></span>
+        <span class="merch-dot" onclick="window.goToSlide(1)"></span>
+        <span class="merch-dot" onclick="window.goToSlide(2)"></span>
+        <span class="merch-dot" onclick="window.goToSlide(3)"></span>
       </div>
     </div>
   </div>
