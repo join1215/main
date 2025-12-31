@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1215. Not an accelerator. Not an incubator. Something new.</title>
+
+<meta name="description" content="Not an accelerator. Not an incubator. Something new.  Get chosen. Get the merch. Enter the circle. Not everyone gets in. Will you?" />
+<meta name="keywords" content="1215, Join1215" />
+<meta name="author" content="1215 Team" />
+<meta name="robots" content="index,follow" />
+
+<meta property="og:title" content="1215. Not an Accelerator. Not an Incubator. Something new." />
+<meta property="og:description" content="Not an accelerator. Not an incubator. Something new.  Get chosen. Get the merch. Enter the circle. Not everyone gets in. Will you?" />
+<meta property="og:image" content="https://www.join1215.com/images/og-image.jpg" />
+<meta property="og:url" content="https://www.join1215.com" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="1215.  Not an Accelerator. Not an Incubator. Something new." />
+<meta name="twitter:description" content="Not an accelerator. Not an incubator. Something new.  Get chosen. Get the merch. Enter the circle. Not everyone gets in. Will you?" />
+<meta name="twitter:image" content="https://www.join1215.com/twitter-card.jpg" />
+
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="1215" />
+<link rel="manifest" href="/favicon/site.webmanifest" />
+
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --background-color: #1b0c0d;
+  --ambient-glow: rgba(255, 50, 50, 0.15);
+  --poster-gradient-start: #7f0d12;
+  --poster-gradient-end: #3c0a0d;
+  --text-color: #ffe5d3;
+  --intro-color: #ffbfa0;
+  --tagline-color: #ffc6b0;
+  --button-bg-start: #e63946;
+  --button-bg-end: #f5475d;
+  --button-text-color: #fff5e6;
+  --button-hover-glow1: #ff9b95;
+  --button-hover-glow2: #ff6b6b;
+  --close-btn-bg: rgba(255,255,255,0.1);
+  --close-btn-hover-bg: rgba(255,255,255,0.2);
+  --close-btn-hover-color: #ff6b6b;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 80px var(--ambient-glow),
+      inset 0 2px 12px rgba(255,255,255,0.05),
+      inset 0 -3px 12px rgba(0,0,0,0.5);
+  }
+  50% {
+    transform: translateY(0) scale(1.025);
+    box-shadow:
+      0 0 120px rgba(255, 80, 80, 0.25),
+      inset 0 2px 14px rgba(255,255,255,0.08),
+      inset 0 -3px 14px rgba(0,0,0,0.55);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 0 80px var(--ambient-glow),
+      inset 0 2px 12px rgba(255,255,255,0.05),
+      inset 0 -3px 12px rgba(0,0,0,0.5);
+  }
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(27,12,13,0.5);
+  z-index: 0;
+}
+
+.poster-wrapper {
+  width: 82vmin;
+  height: 82vmin;
+  padding: 2vmin;
+  box-sizing: content-box;
+  max-width: 90vw;
+  max-height: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5%;
+  box-shadow: 
+    0 0 80px var(--ambient-glow),
+    inset 0 2px 14px rgba(255,255,255,0.15),
+    inset 0 -3px 20px rgba(0,0,0,0.35);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  box-sizing: border-box;
+  overflow: visible;
+  z-index: 20;
+}
+
+.poster.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro {
+  font-family: 'Sawarabi Mincho', serif;
+  font-weight: 800;
+  color: var(--intro-color);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7),0 0 20px rgba(255,100,100,0.4);
+  font-size: calc(8vmin + 8px);
+  margin-bottom: 1vmin;
+}
+
+.tagline {
+  font-family: 'Sawarabi Mincho', serif;
+  color: var(--tagline-color);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7),0 0 8px rgba(255,120,120,0.25);
+  font-size: calc(2.5vmin + 2px);
+  margin-bottom: 2vmin;
+}
+
+.teaser {
+  font-size: calc(2vmin + 2px);
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 3vmin;
+}
+
+.come {
+  display: inline-block;
+  padding: 2vmin 5vmin;
+  font-size: calc(3vmin + 2px);
+  font-weight: 700;
+  border-radius: 1.5vmin;
+  background: linear-gradient(145deg, var(--button-bg-start), var(--button-bg-end));
+  color: var(--button-text-color);
+  text-decoration: none;
+  box-shadow: 0 6px 20px var(--ambient-glow), inset 0 2px 8px rgba(255,255,255,0.15);
+  transition: all 0.3s ease;
+}
+
+.come:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px var(--button-hover-glow1), 0 0 60px var(--button-hover-glow2);
+}
+
+@media (max-width: 600px) {
+  .come {
+    padding: 3vmin 6vmin;
+    font-size: calc(4vmin + 2px);
+  }
+}
+
+.overlay {
+  position: fixed;
+  display: none;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgb(50,10,12), rgb(20,5,6));
+  z-index: 20;
+  overflow-y: auto;
+  padding: 50px 20px;
+  box-sizing: border-box;
+}
+
+.overlay-content {
+  max-width: 700px;
+  margin: auto;
+  color: var(--text-color);
+}
+
+.close-btn {
+  position: fixed;
+  top: 20px; right: 30px;
+  width: 50px; height: 50px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  font-size: 32px;
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 50%;
+  background: var(--close-btn-bg);
+  transition: all 0.3s ease;
+  z-index: 30;
+}
+
+.close-btn:hover {
+  background: var(--close-btn-hover-bg);
+  color: var(--close-btn-hover-color);
+  transform: scale(1.1);
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.merch-item {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.merch-item img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease;
+}
+
+.merch-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255,50,50,0.5);
+}
+
+.merch-info { padding: 12px 8px; }
+.merch-info h3 { margin: 8px 0 4px; font-size: 18px; }
+.merch-info p { font-size: 14px; opacity: 0.8; margin:0 0 6px; }
+.merch-info span { font-weight:600; font-size:16px; color:var(--intro-color); }
+
+</style>
+</head>
+<body>
+
+<div class="poster-wrapper">
+  <div class="poster">
+    <div class="intro">1215</div>
+    <div class="tagline">Not an accelerator.<br>Not an incubator.<br>Something new.</div>
+    <div class="teaser">
+      Get chosen. Get the <a href="javascript:void(0);" onclick="openMerchOverlay();" style="color:inherit;text-decoration:underline;">merch</a>. Enter the circle.<br>
+      Not everyone gets in. Will you?
+    </div>
+    <a href="mailto:membership@join1215.com" class="come">Join</a>
+  </div>
+</div>
+
+<!-- Merch Overlay -->
+<div id="merchOverlay" class="overlay">
+  <span class="close-btn" onclick="closeMerchOverlay()">&times;</span>
+  <div class="overlay-content">
+    <!-- Merch preview container -->
+    <div id="merchPreview" style="display:none; position:relative; text-align:center; margin-bottom:30px;">
+      <img id="merchPreviewImg" src="" alt="Merch Preview" style="max-width:80%; max-height:60vh; border-radius:15px; box-shadow:0 10px 30px rgba(255,50,50,0.5);">
+      
+      <!-- Navigation Arrows -->
+      <div class="merch-nav left" onclick="prevMerch()" style="position:absolute; top:50%; left:10px; transform:translateY(-50%); font-size:2rem; color:#ffbfa0; cursor:pointer;">&#10094;</div>
+      <div class="merch-nav right" onclick="nextMerch()" style="position:absolute; top:50%; right:10px; transform:translateY(-50%); font-size:2rem; color:#ffbfa0; cursor:pointer;">&#10095;</div>
+    </div>
+
+    <!-- Merch grid -->
+    <div class="merch-grid">
+      <div class="merch-item"><img src="images/merc1.png" alt="Merch 1"><div class="merch-info"><h3>1215 Notebook</h3><p>A quiet ledger for ideas not meant for everyone</p></div></div>
+      <div class="merch-item"><img src="images/merc2.png" alt="Merch 2"><div class="merch-info"><h3>1215 Member Card</h3><p>A discreet key—recognizable only to those who know</p></div></div>
+      <div class="merch-item"><img src="images/merc3.png" alt="Merch 3"><div class="merch-info"><h3>1215 Umbrella</h3><p>Structured protection for the moments that matter</p></div></div>
+      <div class="merch-item"><img src="images/merc4.png" alt="Merch 4"><div class="merch-info"><h3>1215 Baseball Cap</h3><p>A refined emblem for creative movement and those in motion</p></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const poster = document.querySelector('.poster');
+  poster.classList.add('visible');
+});
+
+let currentMerchIndex = 0;
+let merchItems;
+
+function openMerchOverlay() {
+  document.getElementById('merchOverlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMerchOverlay() {
+  document.getElementById('merchOverlay').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  document.getElementById('merchPreview').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  merchItems = Array.from(document.querySelectorAll('.merch-item img'));
+  const preview = document.getElementById('merchPreview');
+  const previewImg = document.getElementById('merchPreviewImg');
+
+  merchItems.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentMerchIndex = index;
+      previewImg.src = img.src;
+      preview.style.display = 'block';
+      preview.scrollIntoView({behavior:'smooth'});
+    });
+  });
+});
+
+function nextMerch() {
+  if (!merchItems) return;
+  currentMerchIndex = (currentMerchIndex + 1) % merchItems.length;
+  document.getElementById('merchPreviewImg').src = merchItems[currentMerchIndex].src;
+}
+
+function prevMerch() {
+  if (!merchItems) return;
+  currentMerchIndex = (currentMerchIndex - 1 + merchItems.length) % merchItems.length;
+  document.getElementById('merchPreviewImg').src = merchItems[currentMerchIndex].src;
+}
+</script>
+
+<script>
+function centerPoster() {
+  const wrapper = document.querySelector('.poster-wrapper');
+  const intro = document.querySelector('.intro');
+  const tagline = document.querySelector('.tagline');
+  const teaser = document.querySelector('.teaser');
+  const joinBtn = document.querySelector('.come');
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  if (vh < 600 || vw < 500) {
+    intro.style.fontSize = `calc(9vmin + 8px)`;
+    tagline.style.fontSize = `calc(3vmin + 2px)`;  
+    teaser.style.fontSize = `calc(2.2vmin + 2px)`; 
+    joinBtn.style.fontSize = `calc(2.2vmin + 2px)`; 
+    joinBtn.style.padding = `1.5vmin 3.5vmin`;
+  } else {
+    intro.style.fontSize = `calc(8vmin + 8px)`;
+    tagline.style.fontSize = `calc(2.5vmin + 2px)`;
+    teaser.style.fontSize = `calc(2vmin + 2px)`;
+    joinBtn.style.fontSize = `calc(2vmin + 2px)`;
+    joinBtn.style.padding = `1vmin 3vmin`;
+  }
+
+  const rect = wrapper.getBoundingClientRect();
+  const posterWidth = rect.width;
+  const posterHeight = rect.height;
+
+  const left = (vw - posterWidth) / 2;
+  const top = (vh - posterHeight) / 2;
+
+  wrapper.style.position = 'absolute';
+  wrapper.style.left = `${left}px`;
+  wrapper.style.top = `${top}px`;
+}
+
+centerPoster();
+
+window.addEventListener('resize', () => {
+  requestAnimationFrame(centerPoster);
+});
+</script>
+
+<script>
+(function() {
+  const wrapper = document.querySelector('.poster-wrapper');
+  let isDragging = false;
+  let didMove = false;
+  let startX, startY;
+  let currentX = 0, currentY = 0;
+
+  const CLICK_THRESHOLD = 6;
+
+  function startDrag(e) {
+    didMove = false;
+    isDragging = true;
+    wrapper.classList.add('dragging');
+
+    const evt = e.touches ? e.touches[0] : e;
+    startX = evt.clientX - currentX;
+    startY = evt.clientY - currentY;
+  }
+
+  function moveDrag(e) {
+    if (!isDragging) return;
+
+    const evt = e.touches ? e.touches[0] : e;
+
+    const newX = evt.clientX - startX;
+    const newY = evt.clientY - startY;
+
+    if (Math.abs(newX - currentX) > CLICK_THRESHOLD ||
+        Math.abs(newY - currentY) > CLICK_THRESHOLD) {
+      didMove = true;
+    }
+
+    currentX = newX;
+    currentY = newY;
+
+    wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+    e.preventDefault();
+  }
+
+  function endDrag(e) {
+    wrapper.classList.remove('dragging');
+
+    if (!didMove) {
+      return;
+    }
+
+    e.preventDefault();
+    
+    isDragging = false;
+  }
+
+  wrapper.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', moveDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  wrapper.addEventListener('touchstart', startDrag, { passive: true });
+  document.addEventListener('touchmove', moveDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+
+})();
+</script>
+
+<script>
+(function() {
+  const wrapper = document.querySelector('.poster-wrapper');
+
+  let isDragging = false;
+  let currentX = 0;
+  let currentY = 0;
+  let startDragX = 0;
+  let startDragY = 0;
+
+  const amplitude = 10;
+  const speed = 0.002;
+  let startTime = null;
+
+  function centerWrapper() {
+    const rect = wrapper.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+
+    const viewportW = window.innerWidth;
+    const viewportH = window.innerHeight;
+
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = (viewportW - w) / 2 + 'px';
+    wrapper.style.top  = (viewportH - h) / 2 + 'px';
+
+    currentX = 0;
+    currentY = 0;
+    wrapper.style.transform = `translate(0px, 0px)`;
+  }
+
+  centerWrapper();
+
+  window.addEventListener('resize', centerWrapper);
+
+  function startDrag(e) {
+    isDragging = true;
+    const evt = e.touches ? e.touches[0] : e;
+    startDragX = evt.clientX - currentX;
+    startDragY = evt.clientY - currentY;
+  }
+
+  function moveDrag(e) {
+    if (!isDragging) return;
+    const evt = e.touches ? e.touches[0] : e;
+    currentX = evt.clientX - startDragX;
+    currentY = evt.clientY - startDragY;
+    wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
+
+  function endDrag() {
+    isDragging = false;
+  }
+
+  wrapper.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', moveDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  wrapper.addEventListener('touchstart', startDrag, { passive: true });
+  document.addEventListener('touchmove', moveDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+
+  function animate(time) {
+    if (!startTime) startTime = time;
+    const t = time - startTime;
+
+    if (!isDragging) {
+      const offsetX = Math.sin(t * speed) * amplitude;
+      const offsetY = Math.cos(t * speed) * amplitude;
+      wrapper.style.transform = `translate(${currentX + offsetX}px, ${currentY + offsetY}px)`;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
+</script>
+
+<script>
+const joinWindows = [
+  { start: "12:00", end: "13:00" },
+  { start: "20:00", end: "21:00" }
+];
+
+const accessKey = "7Q92-FN4H";
+
+const joinButton = document.querySelector('.come');
+
+const infoEl = document.createElement("div");
+infoEl.style.color = "#ffc6b0";
+infoEl.style.marginTop = "8px";
+infoEl.style.fontSize = "calc(1.5vmin + 2px)";
+infoEl.style.fontWeight = "600";
+infoEl.style.textAlign = "center";
+infoEl.style.textShadow = "0 0 8px rgba(255,100,100,0.4)";
+joinButton.insertAdjacentElement("afterend", infoEl);
+
+function timeToMinutes(str) {
+  const [h, m] = str.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function getNowMinutes() {
+  const d = new Date();
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+function isWindowOpen() {
+  const now = getNowMinutes();
+  return joinWindows.some(w => {
+    const start = timeToMinutes(w.start);
+    const end   = timeToMinutes(w.end);
+    return now >= start && now < end;
+  });
+}
+
+function getNextWindowTime() {
+  const now = new Date();
+  const nowMin = getNowMinutes();
+
+  const candidates = joinWindows.map(w => {
+    const [h, m] = w.start.split(":").map(Number);
+    const when = new Date();
+    when.setHours(h, m, 0, 0);
+
+    if (timeToMinutes(w.start) <= nowMin) when.setDate(when.getDate() + 1);
+    return when;
+  });
+
+  return candidates.sort((a, b) => a - b)[0];
+}
+
+function updateJoinState() {
+  const open = isWindowOpen();
+
+  if (open) {
+    joinButton.style.opacity = "1";
+    joinButton.style.pointerEvents = "auto";
+    joinButton.style.animation = "pulseGlow 3s infinite";
+
+    infoEl.textContent = "Access Key: " + accessKey;
+  } else {
+    joinButton.style.opacity = "0.35";
+    joinButton.style.pointerEvents = "none";
+    joinButton.style.animation = "none";
+
+    const next = getNextWindowTime();
+    const diff = Math.floor((next - new Date()) / 1000);
+    const h = Math.floor(diff / 3600);
+    const m = Math.floor((diff % 3600) / 60);
+    const s = diff % 60;
+
+    infoEl.textContent = `Next opening in ${h}h ${m}m ${s}s`;
+  }
+}
+
+setInterval(updateJoinState, 1000);
+updateJoinState();
+</script>
+
+</body>
+</html>
