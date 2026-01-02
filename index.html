@@ -30,7 +30,7 @@
 <link rel="manifest" href="/favicon/site.webmanifest" />
 
   
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -79,7 +79,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   background: 
     radial-gradient(ellipse at 30% 40%, rgba(127, 13, 18, 0.4) 0%, transparent 50%),
     radial-gradient(ellipse at 70% 60%, rgba(60, 10, 13, 0.3) 0%, transparent 50%),
@@ -187,11 +187,13 @@ body::after {
 }
 
 .tagline {
-  font-family: 'Sawarabi Mincho', serif;
+  font-family: 'Playfair Display', serif;
   color: var(--tagline-color);
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7),0 0 8px rgba(255,120,120,0.25);
   font-size: calc(2.5vmin + 2px);
   margin-bottom: 2vmin;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .teaser {
@@ -199,6 +201,8 @@ body::after {
   color: var(--text-color);
   line-height: 1.6;
   margin-bottom: 3vmin;
+  font-weight: 400;
+  letter-spacing: 0.3px;
 }
 
 .come {
